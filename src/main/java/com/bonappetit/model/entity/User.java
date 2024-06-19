@@ -19,7 +19,7 @@ public class User extends BaseEntity{
     @OneToMany(mappedBy = "addedBy", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Recipe> addedRecipes;
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     private Set<Recipe> favoriteRecipes;
 
 

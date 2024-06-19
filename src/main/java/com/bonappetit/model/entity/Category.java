@@ -14,7 +14,7 @@ public class Category extends BaseEntity{
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private Set<Recipe> recipes;
 
     public CategoryEnum getName() {

@@ -14,7 +14,7 @@ public class Recipe extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String ingredients;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER)

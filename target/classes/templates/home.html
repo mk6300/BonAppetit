@@ -6,29 +6,31 @@
 <header th:replace="fragments/commons::nav"></header>
 <main>
     <div class="container bg-blur rounded mt-1 mb-4">
-        <h6 class="bg-gray text-dark mb-0 mt-0">Welcome, {username}</h6>
+        <h6 th:if="${@loggedUser.isLogged()}" class="bg-gray text-dark mb-0 mt-0"th:text="|Welcome, ${@loggedUser.username}|"></h6>
         <div class="row mt-1 mb-2">
             <div class="col-6 mt-1 mb-1">
 
                 <div>
-                    <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">Desserts ({count})</h3>
+                    <h3 class="mySticky bg-gray text-dark  mb-0 mt-2" th:text="|Desserts: ${allDesserts.size()}|"></h3>
                     <div class="bg-dark rounded m-auto" style="height: 31vh; overflow: auto">
                         <table class="table table-striped table-dark">
+                            <th:block th:each="dessert: ${allDesserts}">
                             <tr>
                                 <td class="bg-warning" scope="row" style="width: 5%">
                                     <img class="mr-2 " src="/img/dessert.png" alt="Dessert" width="35px" height="35px">
                                 </td>
-                                <td>{name}</td>
-                                <td>{ingredients}</td>
+                                <td th:text="|${dessert.name()}|"></td>
+                                <td th:text="|${dessert.ingredients()}|"></td>
                                 <td><a href="/"><img class="mr-2 " src="/img/add-to-favourites.png" alt="Dessert" width="35px" height="35px"></a></td>
                                 </td>
                             </tr>
+                            </th:block>>
                         </table>
                     </div>
                 </div>
 
                 <div>
-                    <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">Cocktails ({count})</h3>
+                    <h3 class="mySticky bg-gray text-dark  mb-0 mt-2"th:text="|Cocktails: ${allCocktails.size()}|"></h3>
                     <div class="bg-dark rounded m-auto" style="height: 31vh; overflow: auto">
                         <table class="table table-striped table-dark">
                             <tr>
@@ -47,7 +49,7 @@
 
             <div class="col-6 mt-1 mb-1">
                 <div>
-                    <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">Main Dishes ({count})</h3>
+                    <h3 class="mySticky bg-gray text-dark  mb-0 mt-2"th:text="|Main Dishes: ${allMains.size()}|"></h3>
                     <div class="bg-dark rounded m-auto" style="height: 31vh; overflow: auto">
                         <table class="table table-striped table-dark">
                             <tr>
@@ -63,7 +65,7 @@
                 </div>
 
                 <div>
-                    <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">Favourites ({count})</h3>
+                    <h3 class="mySticky bg-gray text-dark  mb-0 mt-2"th:text="|Favourites: ${allFavorites.size()}|"></h3>
                     <div class="bg-dark rounded m-auto" style="height: 31vh; overflow: auto">
                         <table class="table table-striped table-dark">
                             <tr>

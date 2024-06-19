@@ -2,6 +2,7 @@ package com.bonappetit.service;
 
 import com.bonappetit.model.dto.RegisterDTO;
 import com.bonappetit.model.dto.UserDTO;
+import com.bonappetit.model.entity.Recipe;
 import com.bonappetit.model.entity.User;
 import com.bonappetit.repo.UserRepo;
 import com.bonappetit.util.LoggedUser;
@@ -9,11 +10,13 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
     private final PasswordEncoder encoder;
     private final LoggedUser loggedUser;
@@ -118,4 +121,10 @@ public class UserServiceImpl implements UserService{
         userRepo.save(test);
     }
 
+    public Set<Recipe> findFavourites(Long id) {
+        return userRepo.findById(id)
+                .map(User::getFavoriteRecipes)
+                .orElseGet(HashSet::new);
+
+    }
 }
