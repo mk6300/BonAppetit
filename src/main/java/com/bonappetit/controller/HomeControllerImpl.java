@@ -61,4 +61,10 @@ public class HomeControllerImpl implements HomeController {
        return "home";
 
     }
+
+    @Override
+    public String addToFavoritesById(Long id) {
+        recipeService.addToFavorites(id);
+        return "redirect:/home";
+    }
 }

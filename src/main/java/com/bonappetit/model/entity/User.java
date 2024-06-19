@@ -2,6 +2,7 @@ package com.bonappetit.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,8 @@ public class User extends BaseEntity{
 
 
     public User() {
+        this.addedRecipes = new HashSet<>();
+        this.favoriteRecipes = new HashSet<>();
     }
 
     public String getUsername() {
@@ -64,6 +67,10 @@ public class User extends BaseEntity{
 
     public void setFavoriteRecipes(Set<Recipe> favoriteRecipes) {
         this.favoriteRecipes = favoriteRecipes;
+    }
+
+    public void addFavourite(Recipe recipe) {
+        this.favoriteRecipes.add(recipe);
     }
 }
 

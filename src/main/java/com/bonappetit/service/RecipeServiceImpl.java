@@ -157,15 +157,28 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Set<Recipe> getByCategory(CategoryEnum categoryEnum) {
         Category category = categoryRepo.findByName(categoryEnum).orElse(null);
-        Set<Recipe> allInCategory = RecipeRepo.getAllByCategory(category);
+        Set<Recipe> allInCategory = recipeRepo.getAllByCategory(category);
 
         return allInCategory;
     }
 
+    @Override
+    public void addToFavorites(Long id) {
+        Optional<User> userOpt = userRepo.findById(loggedUser.getId());
 
-//
-//    public long getAllCount() {
-//        long count = wordRepo.count();
-//        return count;
-//    }
+        if (userOpt.isEmpty()) {
+            return;
+        }
+
+        Optional<Recipe> recipeOpt = recipeRepo.findById(id);
+
+        if (recipeOpt.isEmpty()) {
+            return;
+        }
+
+        userOpt.get().addFavourite(recipeOpt.get());
+
+        userRepo.save(userOpt.get());
+    }
+
 }
