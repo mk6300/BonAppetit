@@ -56,7 +56,7 @@
                                 </td>
                                 <td th:text="${main.getName()}"></td>
                                 <td th:text="${main.getIngredients()}"></td>
-                                <td><a href="/"><img class="mr-2 " src="/img/add-to-favourites.png" alt="Main-Dish" width="35px" height="35px"></a></td>
+                                <td><a th:href="@{/home/addtoFavorites-by-id/{id}(id = ${main.getId})}"><img class="mr-2 " src="/img/add-to-favourites.png" alt="Main-Dish" width="35px" height="35px"></a></td>
                             </tr>
                         </table>
                     </div>
